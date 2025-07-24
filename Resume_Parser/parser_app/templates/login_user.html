@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+<body>
+  {% include "navbar.html" %}
+  <div class="upload-container">
+    <div class="upload-header">
+      <h1 class="gradient-text">🔐 Login</h1>
+    </div>
+    <form method="POST" class="upload-form">
+      {% csrf_token %}
+      <input type="text" name="username" placeholder="Username" required class="file-upload-box"><br><br>
+      <input type="password" name="password" placeholder="Password" required class="file-upload-box"><br><br>
+      <div class="upload-actions">
+        <button type="submit" class="submit-btn">Login</button>
+      </div>
+    </form>
+  </div>
+  <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Job Matcher</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  {% include "navbar.html" %}
+  
+  <div class="upload-container">
+    <div class="upload-header">
+      <h1 class="gradient-text">🔍 Job Matcher</h1>
+      <p>Enter your skills to find relevant jobs</p>
+    </div>
+    <form method="POST" class="upload-form">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class="upload-actions">
+        <button type="submit" class="submit-btn pulse-on-hover">
+          <i class="fas fa-search"></i> Match Jobs
+        </button>
+      </div>
+    </form>
+
+    {% if matched_jobs %}
+    <div class="results-container">
+      <h2 class="results-header">🔗 Matched Jobs</h2>
+      {% for job in matched_jobs %}
+        <div class="info-card">
+          <div class="card-header">
+            <h2>💼 {{ job.title }}</h2>
+            <span class="score-badge">{{ job.match_score }} skill match</span>
+          </div>
+          <p><strong>Required Skills:</strong> {{ job.required_skills|join:", " }}</p>
+        </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

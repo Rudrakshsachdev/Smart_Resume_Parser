@@ -1,0 +1,259 @@
+{% comment %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Parsed Resume Summary</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- ✅ Include the navbar -->
+  {% include 'navbar.html' %}
+
+  <!-- ✅ Main container -->
+  <section class="results-container" style="max-width: 900px; margin: 3rem auto;">
+    <h1 class="gradient-text animate-fade-in-up" style="text-align: center; font-size: 2.5rem; font-weight: 700;">
+      🎯 Parsed Resume Summary
+    </h1>
+
+    <!-- ✅ Resume Score -->
+    <div class="info-card fade-in section-delay-1"
+      style="background: white; padding: 1.5rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm); margin-top: 1.5rem;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">📈 Resume Score</h2>
+
+      <div class="score-bar-container">
+        <div id="scoreBar" class="score-bar" data-score="{{ resume_score }}">
+          Score: {{ resume_score }}/100
+        </div>
+      </div>
+
+      {% if suggestions %}
+      <div style="margin-top: 1rem;">
+        <h4 style="margin-bottom: 0.5rem;">💡 Suggestions to Improve:</h4>
+        <ul>
+          {% for tip in suggestions %}
+          <li>✅ {{ tip }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- ✅ Basic Information -->
+    <div class="info-card hover-scale fade-in section-delay-1"
+      style="background: white; padding: 1.5rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm); margin-top: 2rem;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">👤 Basic Information</h2>
+      <p><strong>Name:</strong> {{ name|default:"Not found" }}</p>
+      <p><strong>Email:</strong> {{ email|default:"Not found" }}</p>
+      <p><strong>Phone:</strong> {{ phone|default:"Not found" }}</p>
+    </div>
+
+    <!-- ✅ Skills -->
+    {% if skills %}
+    <div class="info-card hover-scale fade-in section-delay-2"
+      style="background: white; padding: 1.5rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm); margin-top: 1.5rem;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">🧠 Skills</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        {% for skill in skills %}
+        <span class="skill-pill"
+          style="background: var(--primary-light); padding: 0.4rem 0.8rem; border-radius: 999px; font-size: 0.875rem;">
+          {{ skill }}
+        </span>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- ✅ Education -->
+    {% if education %}
+    <div class="info-card hover-scale fade-in section-delay-3"
+      style="background: white; padding: 1.5rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm); margin-top: 1.5rem;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">🎓 Education</h2>
+      <ul>
+        {% for edu in education %}
+        <li>{{ edu }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    <!-- ✅ Experience -->
+    {% if experience %}
+    <div class="info-card hover-scale fade-in section-delay-4"
+      style="background: white; padding: 1.5rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm); margin-top: 1.5rem;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">💼 Experience</h2>
+      <ul>
+        {% for exp in experience %}
+        <li>{{ exp }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    <!-- ✅ Projects -->
+    {% if projects %}
+    <div class="info-card hover-scale fade-in section-delay-5"
+      style="background: white; padding: 1.5rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm); margin-top: 1.5rem;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">🚀 Projects</h2>
+      <ul>
+        {% for proj in projects %}
+        <li>{{ proj }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    <!-- ✅ Certifications -->
+    {% if certifications %}
+    <div class="info-card hover-scale fade-in"
+      style="background: white; padding: 1.5rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm); margin-top: 1.5rem;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">📜 Certifications</h2>
+      <ul>
+        {% for cert in certifications %}
+        <li>{{ cert }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    <!-- ✅ Download Resume -->
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="{{ file_url }}" download class="download-btn"
+        style="padding: 0.75rem 2rem; background: var(--secondary); color: white; text-decoration: none; border-radius: var(--border-radius); font-weight: 600;">
+        ⬇️ Download Uploaded Resume
+      </a>
+    </div>
+  </section>
+
+  <!-- ✅ Include JS for animations -->
+  <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html> {% endcomment %}
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Parsed Resume Summary</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+
+  {% include 'navbar.html' %}
+
+  <section class="results-container" style="max-width: 900px; margin: 3rem auto;">
+    <h1 class="gradient-text animate-fade-in-up" style="text-align: center; font-size: 2.5rem; font-weight: 700;">
+      🎯 Parsed Resume Summary
+    </h1>
+
+    <!-- Resume Score -->
+    <div class="info-card fade-in section-delay-1" style="margin-top: 1.5rem;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">📈 Resume Score</h2>
+
+      <div class="score-bar-container">
+        <div id="scoreBar" class="score-bar" data-score="{{ resume_score }}">
+          Score: {{ resume_score }}/100
+        </div>
+      </div>
+
+      {% if suggestions %}
+      <div style="margin-top: 1rem;">
+        <h4 style="margin-bottom: 0.5rem;">💡 Suggestions to Improve:</h4>
+        <ul>
+          {% for tip in suggestions %}
+          <li>✅ {{ tip }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Basic Info -->
+    <div class="info-card hover-scale fade-in section-delay-1" style="margin-top: 2rem;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">👤 Basic Information</h2>
+      <p><strong>Name:</strong> {{ name|default:"Not found" }}</p>
+      <p><strong>Email:</strong> {{ email|default:"Not found" }}</p>
+      <p><strong>Phone:</strong> {{ phone|default:"Not found" }}</p>
+    </div>
+
+    <!-- Skills -->
+    {% if skills %}
+    <div class="info-card hover-scale fade-in section-delay-2" style="margin-top: 1.5rem;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">🧠 Skills</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        {% for skill in skills %}
+        <span class="skill-pill" style="padding: 0.4rem 0.8rem; font-size: 0.875rem;">
+          {{ skill }}
+        </span>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Education -->
+    {% if education %}
+    <div class="info-card hover-scale fade-in section-delay-3" style="margin-top: 1.5rem;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">🎓 Education</h2>
+      <ul>
+        {% for edu in education %}
+        <li>{{ edu }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    <!-- Experience -->
+    {% if experience %}
+    <div class="info-card hover-scale fade-in section-delay-4" style="margin-top: 1.5rem;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">💼 Experience</h2>
+      <ul>
+        {% for exp in experience %}
+        <li>{{ exp }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    <!-- Projects -->
+    {% if projects %}
+    <div class="info-card hover-scale fade-in section-delay-5" style="margin-top: 1.5rem;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">🚀 Projects</h2>
+      <ul>
+        {% for proj in projects %}
+        <li>{{ proj }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    <!-- Certifications -->
+    {% if certifications %}
+    <div class="info-card hover-scale fade-in" style="margin-top: 1.5rem;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">📜 Certifications</h2>
+      <ul>
+        {% for cert in certifications %}
+        <li>{{ cert }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    <!-- Download Resume -->
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="{{ file_url }}" download class="download-btn"
+        style="padding: 0.75rem 2rem; background: var(--secondary); color: white; text-decoration: none; border-radius: var(--border-radius); font-weight: 600;">
+        ⬇️ Download Uploaded Resume
+      </a>
+    </div>
+  </section>
+
+  <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

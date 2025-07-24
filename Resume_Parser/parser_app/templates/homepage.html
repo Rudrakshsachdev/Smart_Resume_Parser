@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Smart Resume Parser</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- ✅ Include Navbar -->
+  {% include 'navbar.html' %}
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <section class="upload-container fade-in">
+      <div class="upload-header">
+        <h1 class="gradient-text">
+          <i class="fas fa-file-alt"></i> Smart Resume Parser
+        </h1>
+        <p class="upload-subtitle">Upload your PDF or DOCX resume to extract key insights</p>
+      </div>
+      
+      <form class="upload-form animate-fade-in-up" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="file-upload-wrapper">
+          <label for="resumeUpload" class="file-upload-label">
+            <div class="file-upload-box">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <p>Drag & drop your resume here</p>
+              <span>or click to browse files</span>
+            </div>
+            <input type="file" id="resumeUpload" name="resume_file" accept=".pdf,.docx" required>
+          </label>
+          <div class="file-selected" id="fileSelected">
+            <i class="fas fa-check-circle"></i>
+            <span id="fileName">No file selected</span>
+          </div>
+        </div>
+        
+        <div class="upload-actions">
+          <button class="submit-btn pulse-on-hover" type="submit">
+            <i class="fas fa-bolt"></i> Upload & Parse
+          </button>
+        </div>
+      </form>
+      
+      <div class="supported-formats">
+        <span>Supported formats:</span>
+        <div class="format-badges">
+          <span class="format-badge pdf"><i class="fas fa-file-pdf"></i> PDF</span>
+          <span class="format-badge docx"><i class="fas fa-file-word"></i> DOCX</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

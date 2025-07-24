@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Verify OTP</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  {% include "navbar.html" %}
+  <div class="upload-container">
+    <div class="upload-header">
+      <h1 class="gradient-text">🔐 Verify OTP</h1>
+      <p>Please enter the OTP sent to your email.</p>
+    </div>
+    <form method="POST" class="upload-form" id="otp-form">
+      {% csrf_token %}
+      <input type="text" name="otp" placeholder="Enter 6-digit OTP" required class="file-upload-box"><br><br>
+      <div class="upload-actions">
+        <button type="submit" class="submit-btn">Verify</button>
+      </div>
+    </form>
+  </div>
+  <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

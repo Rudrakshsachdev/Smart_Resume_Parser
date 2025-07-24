@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Resume Builder</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+<body>
+
+  {% include 'navbar.html' %}
+
+  <div class="upload-container">
+    <div class="upload-header">
+      <h1 class="gradient-text">🛠️ Build Your Resume</h1>
+      <p class="upload-subtitle">Fill in the details to generate your professional resume</p>
+    </div>
+
+    <form method="POST" class="upload-form resume-form">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label for="id_full_name">Full Name</label>
+        {{ form.full_name }}
+      </div>
+
+      <div class="form-group">
+        <label for="id_email">Email</label>
+        {{ form.email }}
+      </div>
+
+      <div class="form-group">
+        <label for="id_phone">Phone Number</label>
+        {{ form.phone }}
+      </div>
+
+      <div class="form-group">
+        <label for="id_summary">Summary</label>
+        {{ form.summary }}
+      </div>
+
+      <div class="form-group">
+        <label for="id_skills">Skills</label>
+        {{ form.skills }}
+      </div>
+
+      <div class="form-group">
+        <label for="id_education">Education</label>
+        {{ form.education }}
+      </div>
+
+      <div class="form-group">
+        <label for="id_experience">Experience</label>
+        {{ form.experience }}
+      </div>
+
+      <div class="form-group">
+        <label for="id_projects">Projects</label>
+        {{ form.projects }}
+      </div>
+
+      <div class="form-group">
+        <label for="id_certifications">Certifications</label>
+        {{ form.certifications }}
+      </div>
+
+      <div class="upload-actions">
+        <button type="submit" class="submit-btn pulse-on-hover">
+          <i class="fas fa-eye"></i> Preview Resume
+        </button>
+      </div>
+    </form>
+  </div>
+
+</body>
+</html>

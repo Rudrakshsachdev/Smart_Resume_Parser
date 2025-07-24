@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Help & Support</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  {% include 'navbar.html' %}
+
+  <div class="upload-container">
+    <div class="upload-header">
+      <h1 class="gradient-text">❓ Help & Support</h1>
+      <p>Find answers to frequently asked questions and contact our support team.</p>
+    </div>
+
+    <div class="upload-form">
+      <h3>💬 Common Questions:</h3>
+      <ul>
+        <li>📌 <strong>How to use the Resume Parser?</strong><br> Upload your resume, and we’ll extract all key details.</li><br>
+        <li>📌 <strong>How to build a resume?</strong><br> Use the Resume Builder tool under the “Tools” section.</li><br>
+        <li>📌 <strong>Didn’t receive OTP?</strong><br> Wait a minute and check spam. Still no OTP? Try registering again.</li><br>
+        <li>📌 <strong>Having issues logging in?</strong><br> Make sure your credentials are correct. Try resetting your password.</li>
+      </ul>
+
+      <h3 style="margin-top:2rem;">🤖 Need more help?</h3>
+      <p>Use the AI Chatbot in the bottom-right corner to get instant assistance.</p>
+
+      <h3 style="margin-top:2rem;">📧 Contact Support:</h3>
+      <p>Email: <a href="mailto:support@smartresume.com">support@smartresume.com</a></p>
+    </div>
+  </div>
+
+  <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

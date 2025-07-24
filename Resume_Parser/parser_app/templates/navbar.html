@@ -1,0 +1,93 @@
+<!-- templates/navbar.html -->
+
+{% load static %}
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="navbar-brand">
+      <i class="fas fa-file-alt"></i>
+      <span>SmartResume</span>
+    </div>
+    
+    <div class="navbar-links">
+      <a href="{% url 'homepage' %}" class="nav-link active">
+        <i class="fas fa-home"></i> Home
+      </a>
+      <div class="nav-dropdown">
+        <button class="nav-dropbtn">
+          <i class="fas fa-tools"></i> Tools <i class="fas fa-caret-down"></i>
+        </button>
+        <div class="nav-dropdown-content">
+          <a href="{% url 'homepage' %}"><i class="fas fa-file-upload"></i> Resume Parser</a>
+          <a href="{% url 'resume_builder' %}"><i class="fas fa-file-alt"></i> Resume Builder</a>
+          <a href="{% url 'job_matcher' %}"><i class="fas fa-search"></i> Job Matcher</a>
+        </div>
+      </div>
+      <a href="{% url 'help' %}" class="nav-link">
+        <i class="fas fa-question-circle"></i> Help
+      </a>
+    </div>
+    
+    <div class="navbar-actions">
+  {% if user.is_authenticated %}
+    <span style="margin-right: 10px;">👋 Hello, {{ user.username }}</span>
+    <form action="{% url 'logout' %}" method="POST" style="display:inline;">
+      {% csrf_token %}
+      <button class="nav-btn secondary" type="submit">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+    </form>
+  {% else %}
+    <a href="{% url 'login' %}" class="nav-btn secondary">
+      <i class="fas fa-sign-in-alt"></i> Login
+    </a>
+    <a href="{% url 'register' %}" class="nav-btn primary">
+      <i class="fas fa-user-plus"></i> Register
+    </a>
+  {% endif %}
+</div>
+
+      <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+    
+    <button class="hamburger" id="mobileMenuBtn">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="{% url 'homepage' %}" class="mobile-nav-link active">
+      <i class="fas fa-home"></i> Home
+    </a>
+    <a href="{% url 'homepage' %}" class="mobile-nav-link">
+      <i class="fas fa-file-upload"></i> Resume Parser
+    </a>
+    <a href="{% url 'resume_builder' %}" class="mobile-nav-link">
+      <i class="fas fa-file-alt"></i> Resume Builder
+    </a>
+    <a href="{% url 'help' %}" class="mobile-nav-link">
+      <i class="fas fa-question-circle"></i> Help
+    </a>
+    <div class="mobile-menu-actions">
+      <button class="mobile-nav-btn">
+        <i class="fas fa-sign-in-alt"></i> Login
+      </button>
+      <button class="mobile-nav-btn primary">
+        <i class="fas fa-user-plus"></i> Register
+      </button>
+    </div>
+  </div>
+</nav>
+
+
+<div id="chatbot" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
+  <div id="chat-window" style="display:none; width: 300px; height: 400px; background: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.2); overflow: auto; padding: 10px;">
+    <div id="chat-log" style="height: 300px; overflow-y: auto; font-size: 14px;"></div>
+    <input type="text" id="chat-input" placeholder="Ask anything..." style="width: 80%; padding: 8px;" />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+  <button onclick="toggleChat()" style="background: var(--primary); color: white; padding: 10px; border-radius: 50%;">💬</button>
+</div>
+<script src="{% static 'js/script.js' %}"></script>
